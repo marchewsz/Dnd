@@ -1,8 +1,6 @@
-package com.company;
+package dnd.Model;
 
 import java.util.Random;
-
-
 
 public class TestCalculation {
 
@@ -29,8 +27,8 @@ public class TestCalculation {
 
 
     Boolean testWithDice( int difficulty, int modifiers, int dice){
-            modifiers = modifiers + castDice(dice);
-            return simpleTest(difficulty, modifiers);
+        modifiers = modifiers + castDice(dice);
+        return simpleTest(difficulty, modifiers);
     }
     /**
      *
@@ -48,4 +46,19 @@ public class TestCalculation {
     Boolean testWithDice( int difficulty, int modifiers, int dice , boolean winOnTie ){
         if(winOnTie == true)
             difficulty--;
-        return testWithDice(difficulty, modifiers, dic}
+        return testWithDice(difficulty, modifiers, dice);
+    }
+    /*
+    int damageCalculation (int diceSides, int diceNumber, int attackModifiers, int ... resistance)
+    {
+        int efficientDamage =0;
+        if (resistance.length > 0)
+            efficientDamage -= resistance[0];
+        efficientDamage += attackModifiers;
+        efficientDamage += castDice(int diceSides, int dice)
+        if (efficientDamage < 0 )
+            return 0;
+        return efficientDamage
+    }
+     */
+}
