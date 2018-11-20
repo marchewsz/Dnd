@@ -10,14 +10,24 @@ public class TestCalculation {
      * liczba scianek kostki
      * @return
      */
-    int castDice (int diceSides)
+    public int castDice (int diceSides)
     {
         return new Random().nextInt(diceSides) + 1 ;
     }
 
+    public int castDice (int diceSides, int diceQuantity)
+    {
+        int sum =0;
+        for (int i =0;  i < diceQuantity; i++)
+        {
+            sum = sum + castDice(diceSides);
+        }
+        return sum;
+    }
 
 
-    Boolean simpleTest(int difficulty, int modifiers)
+
+    public Boolean simpleTest(int difficulty, int modifiers)
     {
         if (modifiers > difficulty)
             return true;
@@ -26,7 +36,7 @@ public class TestCalculation {
     }
 
 
-    Boolean testWithDice( int difficulty, int modifiers, int dice){
+    public Boolean testWithDice( int difficulty, int modifiers, int dice){
         modifiers = modifiers + castDice(dice);
         return simpleTest(difficulty, modifiers);
     }
@@ -43,13 +53,13 @@ public class TestCalculation {
      * @return
      * Prawda jesli test sie uda
      */
-    Boolean testWithDice( int difficulty, int modifiers, int dice , boolean winOnTie ){
+    public Boolean testWithDice( int difficulty, int modifiers, int dice , boolean winOnTie ){
         if(winOnTie == true)
             difficulty--;
         return testWithDice(difficulty, modifiers, dice);
     }
     /*
-    int damageCalculation (int diceSides, int diceNumber, int attackModifiers, int ... resistance)
+    public int damageCalculation (int diceSides, int diceNumber, int attackModifiers, int ... resistance)
     {
         int efficientDamage =0;
         if (resistance.length > 0)
