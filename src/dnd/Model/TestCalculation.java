@@ -58,17 +58,32 @@ public class TestCalculation {
             difficulty--;
         return testWithDice(difficulty, modifiers, dice);
     }
-    /*
-    public int damageCalculation (int diceSides, int diceNumber, int attackModifiers, int ... resistance)
+
+    /**
+     *
+     * @param diceSides
+     * Liczba scianek kostki
+     * @param diceQuantity
+     * Liczba kostek
+     * @param attackModifiers
+     * + ile do obrażen
+     * @param resistance
+     * odpornosc potwora
+     * @return
+     */
+
+    public int damageCalculation (int diceSides, int diceQuantity, int attackModifiers, int ... resistance)
     {
         int efficientDamage =0;
         if (resistance.length > 0)
             efficientDamage -= resistance[0];
+
         efficientDamage += attackModifiers;
-        efficientDamage += castDice(int diceSides, int dice)
+        efficientDamage += castDice(diceSides,  diceQuantity);
+
         if (efficientDamage < 0 )
             return 0;
-        return efficientDamage
+        return efficientDamage;
     }
-     */
+
 }
