@@ -53,7 +53,10 @@ public class MainLayout extends JFrame {
         Gracz gracz = new Gracz();
         gracz = db.selectGracz(1);
 //        System.out.println(""+gracz.getDane());
-        
+//        int[] atrybutyTest = {12,15,10,2,1,7};
+//        gracz.setAtrybuty(atrybutyTest);
+//        db.updateGracz(gracz);
+
         List<Atut> atuty = db.selectAtuty();
        
         
@@ -85,6 +88,15 @@ public class MainLayout extends JFrame {
         przeznaczenieTextField.setText(gracz.getEpickiePrzeznaczenie());
         druzynaTextField.setText(gracz.getDruzyna());
         pktAkcjiTextField.setText(""+gracz.getPktAkcji());
+        
+        
+        silaWartoscTextField.setText(""+gracz.getSila());
+        kondycjaWartoscTextField.setText(""+gracz.getKondycja());
+        zrecznoscWartoscTextField.setText(""+gracz.getZrecznosc());
+        inteligencjaWartoscTextField.setText(""+gracz.getInteligencja());
+        rozsadekWartoscTextField.setText(""+gracz.getRozsadek());
+        charyzmaWartoscTextField.setText(""+gracz.getCharyzma());
+        
         
         Vector row;
         

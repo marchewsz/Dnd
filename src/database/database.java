@@ -18,7 +18,7 @@ import java.util.*;
 public class database {
     
     public static final String DRIVER = "org.sqlite.JDBC";
-    public static final String DB_URL = "jdbc:sqlite:biblioteka.db";
+    public static final String DB_URL = "jdbc:sqlite:dane.db";
 
     private Connection conn;
     private Statement stat;
@@ -66,7 +66,13 @@ public class database {
                 + "poziom int,"
                 + "epickiePrzeznaczenie varchar(255),"
                 + "druzyna varchar(255),"
-                + "pktAkcji double"
+                + "pktAkcji double,"
+                + "sila int,"
+                + "kondycja int,"
+                + "zrecznosc int,"
+                + "inteligencja int,"
+                + "rozsadek int,"
+                + "charyzma int"
                 + ")";
         String createPrzedmioty = "CREATE TABLE IF NOT EXISTS przedmioty ("
                 + "id_przedmiotu INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -108,7 +114,7 @@ public class database {
     public boolean insertGracz(Gracz gracz){
         try {
             PreparedStatement prepStmt = conn.prepareStatement(
-                    "insert into gracze values (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+                    "insert into gracze values (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
             prepStmt.setString(1, gracz.getImie());
             prepStmt.setString(2, gracz.getRasa());
             prepStmt.setString(3, gracz.getKlasa());
@@ -124,6 +130,13 @@ public class database {
             prepStmt.setString(13, gracz.getEpickiePrzeznaczenie());
             prepStmt.setString(14, gracz.getDruzyna());
             prepStmt.setDouble(15, gracz.getPktAkcji());
+            prepStmt.setInt(16, gracz.getSila());
+            prepStmt.setInt(17, gracz.getKondycja());
+            prepStmt.setInt(18, gracz.getZrecznosc());
+            prepStmt.setInt(19, gracz.getInteligencja());
+            prepStmt.setInt(20, gracz.getRozsadek());
+            prepStmt.setInt(21, gracz.getCharyzma());
+            
             prepStmt.execute();
         } catch (SQLException e) {
             System.err.println("Blad przy wstawianiu gracza");
@@ -218,6 +231,69 @@ public class database {
 //     String epickiePrzeznaczenie;
 //     String druzyna;
 //     double pktAkcji;
+   
+   /**
+    * Funkcja aktualizująca dane gracza o id 1
+    * @param gracz
+    * @return 
+    */
+   public boolean updateGracz(Gracz gracz){
+       int id = 1;
+       try {
+            PreparedStatement prepStmt = conn.prepareStatement(
+                    "UPDATE gracze SET imie = ? ,"
+                            + "rasa = ? , "
+                            + "klasa = ? , "
+                            + "sciezkaArchetypu = ? , "
+                            + "rozmiar = ? , "
+                            + "wiek = ? , "
+                            + "plec = ? , "
+                            + "wzrost = ? , "
+                            + "waga = ? , "
+                            + "charakter = ?, "
+                            + "bostwo = ? , "
+                            + "poziom = ? , "
+                            + "epickiePrzeznaczenie = ? , "
+                            + "druzyna = ? , "
+                            + "pktAkcji = ? , "
+                            + "sila = ? , "
+                            + "kondycja = ? , "
+                            + "zrecznosc = ? , "
+                            + "inteligencja = ? , "
+                            + "rozsadek = ? , "
+                            + "charyzma = ? "
+                            + "WHERE id_gracza = 1;");
+            prepStmt.setString(1, gracz.getImie());
+            prepStmt.setString(2, gracz.getRasa());
+            prepStmt.setString(3, gracz.getKlasa());
+            prepStmt.setString(4, gracz.getSciezkaArchetypu());
+            prepStmt.setString(5, gracz.getRozmiar());
+            prepStmt.setInt(6, gracz.getWiek());
+            prepStmt.setString(7, gracz.getPlec());
+            prepStmt.setDouble(8, gracz.getWzrost());
+            prepStmt.setDouble(9, gracz.getWaga());
+            prepStmt.setString(10, gracz.getCharakter());
+            prepStmt.setString(11, gracz.getBostwo());
+            prepStmt.setInt(12, gracz.getPoziom());
+            prepStmt.setString(13, gracz.getEpickiePrzeznaczenie());
+            prepStmt.setString(14, gracz.getDruzyna());
+            prepStmt.setDouble(15, gracz.getPktAkcji());
+            prepStmt.setInt(16, gracz.getSila());
+            prepStmt.setInt(17, gracz.getKondycja());
+            prepStmt.setInt(18, gracz.getZrecznosc());
+            prepStmt.setInt(19, gracz.getInteligencja());
+            prepStmt.setInt(20, gracz.getRozsadek());
+            prepStmt.setInt(21, gracz.getCharyzma());
+            
+            prepStmt.execute();
+        } catch (SQLException e) {
+            System.err.println("Blad przy wstawianiu gracza");
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+       
+   }
    /**
     * Funkcja wyciągająca z bazy gracza o konkretnym id
     * @param id
@@ -246,6 +322,12 @@ public class database {
            gracz.setEpickiePrzeznaczenie(result.getString("epickiePrzeznaczenie"));
            gracz.setDruzyna(result.getString("druzyna"));
            gracz.setPktAkcji(result.getDouble("pktAkcji"));
+           gracz.setSila(result.getInt("sila"));
+           gracz.setKondycja(result.getInt("kondycja"));
+           gracz.setZrecznosc(result.getInt("zrecznosc"));
+           gracz.setInteligencja(result.getInt("inteligencja"));
+           gracz.setRozsadek(result.getInt("rozsadek"));
+           gracz.setCharyzma(result.getInt("charyzma"));
            return gracz;
        }catch(Exception e){
            e.getMessage();

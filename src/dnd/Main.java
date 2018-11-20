@@ -17,13 +17,11 @@ public class Main {
     public static void main(String[] args) {
         database db = new database();
 //        Gracz albert = new Gracz(1, "Albert","Elf","Paladyn");
-//        db.tr
 //        db.insertGracz(albert);
-//        db.insertGracz("B", "Diablę", "B", "B", "A", 2, "A", 3, 2, "A", "A", 2, "A", "A", 3);
-//        db.truncateGracze();
-//        try{
+//        
 //        List<Gracz> gracze = db.selectGracze();
 //        System.out.println("Lista graczy: ");
+//        try{
 //        for(Gracz g: gracze)
 //            System.out.println("Gracz: "+g.getDane());
 //        }catch(Exception e){
@@ -35,16 +33,16 @@ public class Main {
 //        Atut atut2 = new Atut(2, "Obrona przed smokami", "Bohater otrzymuje +6 do walki ze smokami");
 //        db.insertAtut(atut1);
 //        db.insertAtut(atut2);
-//        db.truncate("atuty");
+//        db.deleteDb("gracze");
 
-        List<Atut> atuty = db.selectAtuty();
-        try{
-        for(Atut a: atuty)
-            System.out.println("Atut: "+a.getNazwa()+" "+a.getOpis());
-        }catch(Exception e){
-            e.getMessage();
-        }
-        
+//        List<Atut> atuty = db.selectAtuty();
+//        try{
+//        for(Atut a: atuty)
+//            System.out.println("Atut: "+a.getNazwa()+" "+a.getOpis());
+//        }catch(Exception e){
+//            e.getMessage();
+//        }
+//        
         
         MainLayout layout = new MainLayout();
     }

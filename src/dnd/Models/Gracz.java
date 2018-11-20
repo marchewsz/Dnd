@@ -28,6 +28,13 @@ public class Gracz {
         this.epickiePrzeznaczenie = "nieznane";
         this.druzyna = "brak";
         this.pktAkcji = 1;
+        sila = 1;
+        kondycja = 1;
+        zrecznosc = 1;
+        inteligencja = 1;
+        rozsadek = 1;
+        charyzma = 1;
+        
         
     }
     
@@ -47,6 +54,76 @@ public class Gracz {
     private String epickiePrzeznaczenie;
     private String druzyna;
     private double pktAkcji;
+    private int sila, kondycja, zrecznosc, inteligencja,rozsadek,charyzma;
+
+    /**
+     * 
+     * @param atrybuty
+     * tablica 6elementów odpowiadających wartościom sily,kondycji,zrecznosci,inteligencji,rozsadkowi, charyzmie
+     * @return 
+     */
+    public boolean setAtrybuty(int[] atrybuty){
+        try{
+        sila = atrybuty[0];
+        kondycja = atrybuty[1];
+        zrecznosc = atrybuty[2];
+        inteligencja = atrybuty[3];
+        rozsadek = atrybuty[4];
+        charyzma = atrybuty[5];
+        }catch(Exception e){
+            System.out.println("Bład przy ustawianiu wielu atrybutów");
+            return false;
+        }
+        return true;
+    }
+    
+    public int getSila() {
+        return sila;
+    }
+
+    public void setSila(int sila) {
+        this.sila = sila;
+    }
+
+    public int getKondycja() {
+        return kondycja;
+    }
+
+    public void setKondycja(int kondycja) {
+        this.kondycja = kondycja;
+    }
+
+    public int getZrecznosc() {
+        return zrecznosc;
+    }
+
+    public void setZrecznosc(int zrecznosc) {
+        this.zrecznosc = zrecznosc;
+    }
+
+    public int getInteligencja() {
+        return inteligencja;
+    }
+
+    public void setInteligencja(int inteligencja) {
+        this.inteligencja = inteligencja;
+    }
+
+    public int getRozsadek() {
+        return rozsadek;
+    }
+
+    public void setRozsadek(int rozsadek) {
+        this.rozsadek = rozsadek;
+    }
+
+    public int getCharyzma() {
+        return charyzma;
+    }
+
+    public void setCharyzma(int charyzma) {
+        this.charyzma = charyzma;
+    }
 
     public Gracz() {        
     }
