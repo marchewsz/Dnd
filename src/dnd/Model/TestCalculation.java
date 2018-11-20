@@ -10,6 +10,15 @@ public class TestCalculation {
      * liczba scianek kostki
      * @return
      */
+    private static TestCalculation instance;
+
+    public static synchronized TestCalculation getInstance() {
+        if (instance == null) {
+            instance = new TestCalculation();
+        }
+        return instance;
+    }
+
     public int castDice (int diceSides)
     {
         return new Random().nextInt(diceSides) + 1 ;
@@ -86,6 +95,8 @@ public class TestCalculation {
             return 0;
         return efficientDamage;
     }
+
+
 
     public boolean savingThrow (int modifier)
     {
