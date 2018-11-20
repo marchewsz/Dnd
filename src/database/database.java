@@ -42,6 +42,12 @@ public class database {
         createTables();
     }
 
+    /**
+     * Tworzenie tabel w bazie danych jeżeli nie istnieją
+     * @return 
+     * -true jeśli tabele zostaną utworzone pomyślnie <br/>
+     * -false w przypadku błędu
+     */
     public boolean createTables()  {
         String createGracze =
                 "CREATE TABLE IF NOT EXISTS gracze ("
@@ -91,6 +97,14 @@ public class database {
         }
         return true;
     }
+    /**
+     * Dodaje do tabeli gracze dane gracza
+     * @param gracz
+     * Obiekt klasy Gracz
+     * @return 
+     * -true jeśli dodanie zakończone pomyślnie <br/>
+     * -false w przypadku błędu
+     */
     public boolean insertGracz(Gracz gracz){
         try {
             PreparedStatement prepStmt = conn.prepareStatement(
@@ -118,7 +132,14 @@ public class database {
         }
         return true;
     }
-    
+    /**
+     * Dodaje przedmiot do tabeli przedmioty 
+     * @param przedmiot
+     * Obiekt klasy Przedmiot
+     * @return 
+     * -true jeśli dodanie zakończone pomyślnie <br/>
+     * -false w przypadku błędu
+     */
     public boolean insertPrzedmiot(Przedmiot przedmiot){
         try {
             PreparedStatement prepStmt = conn.prepareStatement(
@@ -135,7 +156,14 @@ public class database {
         }
         return true;
     }
-    
+    /**
+     * Dodawanie atutu do tabeli atuty
+     * @param atut
+     * Obiekt klasy Atut
+     * @return 
+     * -true jeśli dodanie zakończone pomyślnie <br/>
+     * -false w przypadku błędu
+     */
     public boolean insertAtut(Atut atut){
         
         try {
@@ -151,7 +179,14 @@ public class database {
         }
         return true;
     }
-    
+    /**
+     * Nie używać, do rozbudowy w przypadku wielu graczy
+     * @param idGracz
+     * @param idPrzedmiot
+     * @return 
+     * -true jeśli dodanie zakończone pomyślnie <br/>
+     * -false w przypadku błędu
+     */
    public boolean insertEkwipunek(int idGracz, int idPrzedmiot){
        try {
             PreparedStatement prepStmt = conn.prepareStatement(
@@ -183,6 +218,13 @@ public class database {
 //     String epickiePrzeznaczenie;
 //     String druzyna;
 //     double pktAkcji;
+   /**
+    * Funkcja wyciągająca z bazy gracza o konkretnym id
+    * @param id
+    * Numer id konkretnego gracza z bazy
+    * @return 
+    * Obiekt klasy Gracz
+    */
    public Gracz selectGracz(int id){
        Gracz gracz = new Gracz();
        
@@ -211,7 +253,11 @@ public class database {
        }
    }
    
-   
+   /**
+    * Funkcja zwracająca liste wszystkich graczy w bazie
+    * @return 
+    * Obiekt klasy List, zawierający listę wszystkich graczy (id,imie,klasa,rasa) w bazie
+    */
     public List<Gracz> selectGracze() {
         List<Gracz> gracze = new LinkedList<Gracz>();
         try {
@@ -232,7 +278,11 @@ public class database {
         }
         return gracze;
     }
-    
+    /**
+    * Funkcja zwracająca liste wszystkich atutów w bazie
+    * @return 
+    * Obiekt klasy List, zawierający listę wszystkich atutów w bazie
+    */
     public List<Atut> selectAtuty(){
         List<Atut> atuty = new LinkedList<Atut>();
         try {
@@ -252,6 +302,14 @@ public class database {
         }
         return atuty;
     }
+    
+    /**
+     * Funkcja kasująca zawartość tabeli
+     * @param nazwa
+     * Nazwa tabeli w bazie
+     * @return 
+     * -True jeśli wszystko ok
+     */
     public boolean truncate(String nazwa){
         try {
             PreparedStatement prepStmt = conn.prepareStatement(
@@ -268,7 +326,12 @@ public class database {
         return true;
     }
     
-    
+    /**
+     * 
+     * Funkcja czyszcząca tabele gracze
+     * @return 
+     */
+    @Deprecated
     public boolean truncateGracze(){
         try {
             PreparedStatement prepStmt = conn.prepareStatement(
