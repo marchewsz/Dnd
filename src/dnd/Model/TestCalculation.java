@@ -96,8 +96,6 @@ public class TestCalculation {
         return efficientDamage;
     }
 
-
-
     public boolean savingThrow (int modifier)
     {
         if (castDice(20) + modifier > 10)
