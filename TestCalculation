@@ -1,0 +1,51 @@
+package com.company;
+
+import java.util.Random;
+
+
+
+public class TestCalculation {
+
+    /**
+     *
+     * @param diceSides
+     * liczba scianek kostki
+     * @return
+     */
+    int castDice (int diceSides)
+    {
+        return new Random().nextInt(diceSides) + 1 ;
+    }
+
+
+
+    Boolean simpleTest(int difficulty, int modifiers)
+    {
+        if (modifiers > difficulty)
+            return true;
+        else
+            return false;
+    }
+
+
+    Boolean testWithDice( int difficulty, int modifiers, int dice){
+            modifiers = modifiers + castDice(dice);
+            return simpleTest(difficulty, modifiers);
+    }
+    /**
+     *
+     * @param difficulty
+     * Poziom trudnosci testu
+     * @param modifiers
+     * Laczna suma modyfikatorow gracza
+     * @param dice
+     * Liczba scian kostki
+     * @param winOnTie
+     * Parametr opcjonalny
+     * @return
+     * Prawda jesli test sie uda
+     */
+    Boolean testWithDice( int difficulty, int modifiers, int dice , boolean winOnTie ){
+        if(winOnTie == true)
+            difficulty--;
+        return testWithDice(difficulty, modifiers, dic}
