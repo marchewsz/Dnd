@@ -4,6 +4,7 @@ package dnd;
 import database.database;
 import dnd.Models.Atut;
 import dnd.Models.Gracz;
+import dnd.Model.TestCalculation;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.*;
@@ -54,6 +55,7 @@ public class MainLayout extends JFrame {
 //        System.out.println(""+gracz.getDane());
         
         List<Atut> atuty = db.selectAtuty();
+       
         
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int width = (int) screenSize.getWidth();
@@ -84,18 +86,17 @@ public class MainLayout extends JFrame {
         druzynaTextField.setText(gracz.getDruzyna());
         pktAkcjiTextField.setText(""+gracz.getPktAkcji());
         
+        Vector row;
         
         DefaultTableModel model = (DefaultTableModel) atutyTable.getModel();
-        for(int i = 0; i<atuty.size();i++){
-            Vector row = new Vector();
-            row.add(atuty.get(i).getId());
-            row.add(atuty.get(i).getNazwa());
-            row.add(atuty.get(i).getOpis());
-                model.addRow(row);
-//            atutyTable.setValueAt(atuty.get(i).getId(), i, 0);
-//            atutyTable.setValueAt(atuty.get(i).getNazwa(), i, 1);
-//            atutyTable.setValueAt(atuty.get(i).getOpis(), i, 2);
-            
+        for(Atut atut : atuty){
+            System.out.println("HALO");
+            row = new Vector();
+            row.add(atut.getNazwa());
+            row.add(atut.getOpis());
+            System.out.println(row);
+            model.addRow(row);
+            model.fireTableDataChanged();
         }
         
         
@@ -229,6 +230,7 @@ public class MainLayout extends JFrame {
         zapiszAtutButton = new javax.swing.JButton();
         anulujAtutButton = new javax.swing.JButton();
         usunAtutButton = new javax.swing.JButton();
+        refreshAtutButton = new javax.swing.JButton();
         mocePanel = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -597,7 +599,7 @@ public class MainLayout extends JFrame {
         danePanel.setLayout(danePanelLayout);
         danePanelLayout.setHorizontalGroup(
             danePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 250, Short.MAX_VALUE)
+            .addGap(0, 272, Short.MAX_VALUE)
             .addGroup(danePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(danePanelLayout.createSequentialGroup()
                     .addGap(12, 12, 12)
@@ -1024,25 +1026,20 @@ public class MainLayout extends JFrame {
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Atuty"));
 
+        atutyTable.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         atutyTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Lp", "Nazwa", "Opis"
+                "Nazwa", "Opis"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1067,11 +1064,23 @@ public class MainLayout extends JFrame {
 
         opisAtutuTextField.setText("jTextField75");
 
-        zapiszAtutButton.setText("Zapisz");
+        zapiszAtutButton.setText("Dodaj");
+        zapiszAtutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                zapiszAtutButtonActionPerformed(evt);
+            }
+        });
 
         anulujAtutButton.setText("Anuluj");
 
         usunAtutButton.setText("Usuń");
+
+        refreshAtutButton.setText("O");
+        refreshAtutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshAtutButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout dodajNowyAtutPanelLayout = new javax.swing.GroupLayout(dodajNowyAtutPanel);
         dodajNowyAtutPanel.setLayout(dodajNowyAtutPanelLayout);
@@ -1086,27 +1095,33 @@ public class MainLayout extends JFrame {
                 .addComponent(opisAtutuLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(opisAtutuTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addComponent(refreshAtutButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(zapiszAtutButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(usunAtutButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(anulujAtutButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         dodajNowyAtutPanelLayout.setVerticalGroup(
             dodajNowyAtutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dodajNowyAtutPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(dodajNowyAtutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nazwaAtutuLabel)
-                    .addComponent(nazwaAtutuTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(opisAtutuLabel)
-                    .addComponent(opisAtutuTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(zapiszAtutButton)
-                    .addComponent(anulujAtutButton)
-                    .addComponent(usunAtutButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(dodajNowyAtutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(refreshAtutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(dodajNowyAtutPanelLayout.createSequentialGroup()
+                        .addGroup(dodajNowyAtutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(nazwaAtutuLabel)
+                            .addComponent(nazwaAtutuTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(opisAtutuLabel)
+                            .addComponent(opisAtutuTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(zapiszAtutButton)
+                            .addComponent(anulujAtutButton)
+                            .addComponent(usunAtutButton))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout atutyPanelLayout = new javax.swing.GroupLayout(atutyPanel);
@@ -1117,7 +1132,7 @@ public class MainLayout extends JFrame {
                 .addContainerGap()
                 .addGroup(atutyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
-                    .addComponent(dodajNowyAtutPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 901, Short.MAX_VALUE))
+                    .addComponent(dodajNowyAtutPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         atutyPanelLayout.setVerticalGroup(
@@ -1935,6 +1950,20 @@ public class MainLayout extends JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField23ActionPerformed
 
+    private void zapiszAtutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zapiszAtutButtonActionPerformed
+        DefaultTableModel model = (DefaultTableModel) atutyTable.getModel();
+        Vector row = new Vector();
+        row.add(nazwaAtutuTextField.getText());
+        row.add(opisAtutuTextField.getText());
+        model.addRow(row);   
+
+    }//GEN-LAST:event_zapiszAtutButtonActionPerformed
+
+    private void refreshAtutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshAtutButtonActionPerformed
+        DefaultTableModel model = (DefaultTableModel) atutyTable.getModel();
+        model.fireTableDataChanged();
+    }//GEN-LAST:event_refreshAtutButtonActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -2137,6 +2166,7 @@ public class MainLayout extends JFrame {
     private javax.swing.JLabel ramionaLabel;
     private javax.swing.JLabel rasaLabel;
     private javax.swing.JTextField rasaTextField;
+    private javax.swing.JButton refreshAtutButton;
     private javax.swing.JLabel rozmiarLabel;
     private javax.swing.JTextField rozmiarTextField;
     private javax.swing.JLabel rozsadekLabel;

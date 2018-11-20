@@ -17,6 +17,7 @@ public class Main {
     public static void main(String[] args) {
         database db = new database();
 //        Gracz albert = new Gracz(1, "Albert","Elf","Paladyn");
+//        db.tr
 //        db.insertGracz(albert);
 //        db.insertGracz("B", "Diablę", "B", "B", "A", 2, "A", 3, 2, "A", "A", 2, "A", "A", 3);
 //        db.truncateGracze();
