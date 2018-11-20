@@ -70,6 +70,7 @@ public class TestCalculation {
      * @param resistance
      * odpornosc potwora
      * @return
+     * Otrzymane obrażenia
      */
 
     public int damageCalculation (int diceSides, int diceQuantity, int attackModifiers, int ... resistance)
@@ -84,6 +85,13 @@ public class TestCalculation {
         if (efficientDamage < 0 )
             return 0;
         return efficientDamage;
+    }
+
+    public boolean savingThrow (int modifier)
+    {
+        if (castDice(20) + modifier > 10)
+            return true;
+        return false;
     }
 
 }
